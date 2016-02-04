@@ -5,7 +5,7 @@ REM
 REM argument 1: number of digits to pad
 REM arg 2: save the original filename or change it? [default save]
 
-SETLOCAL REM because i don't know what it does yet ENABLEEXTENSIONS
+SETLOCAL ENABLEEXTENSIONS
 SET me=%~n0 
 SET parent=%~dp0
 
@@ -15,3 +15,4 @@ SET KeepName=1 REM save the original filename or change it
 
 REM in-loop vars
 REM SET 
+FOR %%I IN (%parent%\*) DO @ECHO %%I
