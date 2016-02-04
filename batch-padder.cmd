@@ -13,6 +13,9 @@ REM global vars
 SET digits=3 REM how many digits to pad
 SET KeepName=1 REM save the original filename or change it
 
+ECHO %parent%
 REM in-loop vars
 REM SET 
-FOR %%I IN (%parent%\*) DO @ECHO %%I
+FOR %%c IN (*.*) DO ECHO %%c 
+REM FOR %%I IN (%parent%\*) DO ECHO %%I
+PAUSE
