@@ -14,15 +14,19 @@ REM global vars
 SET digits=%1
 SET KeepName=%2
 SET extension=%3
+SET dir=%4
 
 REM default values
 IF "%digits%"=="" ( SET digits=3 )
 IF "%KeepName%"=="" ( SET KeepName=1 )
+IF "%extension%"=="" ( SET /p extension= What extension would you like to search for? )
 IF "%extension%"=="" ( SET extension=bmp )
 
-ECHO %parent%
-REM in-loop vars
-REM SET 
+
+REM change directory if specified
+IF "%dir%"=="" ( GOTO :Mainloop )
+cd %dir%
+ 
+:Mainloop
 FOR %%I IN (*.%extension%) DO ECHO %%I 
-REM 
 PAUSE
