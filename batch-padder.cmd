@@ -32,19 +32,23 @@ IF "%extension%"=="" (
 	ECHO What extension would you like to search for? 
 	SET /p extension=
 	)
+
 IF "%extension%"=="" ( SET extension=bmp )
 
 REM Directory code
-IF "%dir%"=="" ( CHOICE /m Would you like to enter a folder?
-	IF %ERRORLEVEL% < 2 ( GOTO :Changedir ) REM ////////////////////////////////////
+IF "%dir%"=="" ( 
+	CHOICE /m "Would you like to enter a folder" 
+	IF ERRORLEVEL 2 GOTO ChangeDir
 	SET /p dir= Please specify the folder to enter. 
+	)
 
-:Changedir
-IF "%dir%"=="" ( GOTO :Mainloop )
+:ChangeDir
+IF "%dir%"=="" ( GOTO MainLoop )
 cd %dir%
 REM error check this? ////////////////////////////////////
  
-:Mainloop
+:MainLoop
+ECHO "yo this bit works u r in the main loop"
 FOR %%I IN (*.%extension%) DO ECHO %%I 
 REM add a check for the prefix not being set and skip the prefix code is all we need 
 PAUSE
