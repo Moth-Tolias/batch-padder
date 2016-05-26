@@ -2,7 +2,9 @@
 REM loop over multiple files, padding them out to this standard:
 REM [filename]_[a number of digits] eg: nekoatsume_001
 REM
-REM argument 1: number of digits to pad
+REM errorcodes: 0=success, 1=no directory
+REM
+REM arg 1: number of digits to pad
 REM arg 2: save the original filename or change it? [default:save]
 REM the file extension to search for
  
@@ -44,11 +46,20 @@ IF "%dir%"=="" (
 
 :ChangeDir
 IF "%dir%"=="" ( GOTO MainLoop )
-cd %dir%
-REM error check this? ////////////////////////////////////
- 
+CD %dir%
+IF %errorlevel% NEQ 0 (
+	REM It seems the specified directory does not exist... but the system will tell the user this.
+	SET /p null=
+	EXIT /b 1
+	)
+
 :MainLoop
-ECHO "yo this bit works u r in the main loop"
-FOR %%I IN (*.%extension%) DO ECHO %%I 
-REM add a check for the prefix not being set and skip the prefix code is all we need 
+ECHO Now entering main loop.
+FOR %%I IN (*.%extension%) DO ( 
+	SET TEST=%%I 
+	ECHO %TEST%
+	) 
+REM add a check for the prefix not being set and skip the prefix code is all we need
+
+:FinalWait
 PAUSE
